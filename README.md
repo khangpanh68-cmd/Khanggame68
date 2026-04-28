@@ -54,4 +54,5 @@ Trò chơi sở hữu kho xúc xắc đồ sộ được chia thành nhiều c�
 
 ---
 **Phát triển bởi:** Khangpanh68 (Mobile Developer)
+
 **Dành cho:** Khangpanh68 (Mobile Developer)
