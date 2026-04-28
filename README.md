@@ -53,5 +53,5 @@ Trò chơi sở hữu kho xúc xắc đồ sộ được chia thành nhiều c�
 * **V8.5:** Cập nhật hiệu ứng gợi ý triệu hồi và tối ưu hóa UI.
 
 ---
-**Phát triển bởi:** Gemini AI Assistant  
-**Dành cho:** Khang (Mobile Developer)
+**Phát triển bởi:** Khangpanh68 (Mobile Developer)
+**Dành cho:** Khangpanh68 (Mobile Developer)
