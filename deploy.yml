@@ -1,35 +1,33 @@
-# Tên của quy trình tự động hóa
-name: CI/CD - Deploy Random Dice Ultra
+# Tên quy trình tự động hóa
+name: Deploy Random Dice Ultra V12
 
 on:
-  # Tự động chạy khi có code mới được đẩy lên nhánh main
+  # Chạy khi Khang đẩy code lên nhánh main
   push:
     branches: ["main"]
 
-  # Cho phép chạy thủ công từ mục Actions trên GitHub
+  # Cho phép chạy thủ công từ tab Actions
   workflow_dispatch:
 
-# Thiết lập các quyền cần thiết để GitHub Actions có thể ghi đè vào trang Pages
+# Thiết lập quyền hạn cho GitHub Actions
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Tránh xung đột nếu có nhiều người cùng chỉnh sửa code một lúc
+# Tránh xung đột luồng xử lý
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  # Công việc chính: Deploy
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    
     steps:
-      # Bước 1: Lấy code từ kho lưu trữ về máy chủ ảo
+      # Bước 1: Lấy code mới nhất từ Repo
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -37,15 +35,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # Bước 3: Nén và chuẩn bị các tệp tin (index.html, assets, v.v.)
+      # Bước 3: Đóng gói toàn bộ file (index.html, readme, ảnh...)
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Triển khai toàn bộ thư mục gốc
+          # Triển khai từ thư mục gốc
           path: '.'
 
-      # Bước 4: Đưa lên máy chủ web của GitHub
+      # Bước 4: Đẩy lên máy chủ web của GitHub
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
