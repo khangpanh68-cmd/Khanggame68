@@ -1,58 +1,35 @@
-# 🎲 Random Dice Ultra - Phiên bản V9.1.3 (Final Fix)
+# 🎲 Random Dice Ultra V12.0 - Cinematic Edition
 
-**Random Dice Ultra** là một trò chơi chiến thuật thủ thành (Tower Defense) đỉnh cao dành cho thiết bị di động. Trò chơi kết hợp giữa yếu tố ngẫu nhiên, khả năng quản lý tài nguyên và tư duy ghép quân để chống lại những đợt quái vật không hồi kết.
+Chào mừng bạn đến với **Random Dice Ultra**, một trò chơi chiến thuật xúc xắc được phát triển bởi **Khang**. Trải nghiệm cảm giác phòng thủ tháp (Tower Defense) kịch tính với hệ thống xúc xắc đa dạng và đồ họa hiệu ứng rực rỡ.
 
----
+## 🚀 Tính năng nổi bật (V12.0)
+* **Hệ thống Xúc xắc:** 30 loại xúc xắc với màu sắc và chỉ số riêng biệt.
+* **Tỷ lệ triệu hồi:** 10% cơ hội nhận ngay xúc xắc **VIP/ULTRA** cực mạnh khi triệu hồi.
+* **Hệ thống Skin VIP:** 10 loại Skin đẳng cấp (Neon, Diamond, Cyber, Godly Aura...) có thể mở khóa trong cửa hàng.
+* **Đồ họa Cinematic:** Hiệu ứng đổ bóng 3D, Gradient và Glow năng lượng cực đẹp.
+* **Quái vật thông minh:** Hiển thị máu trực tiếp trên quái vật và hệ thống Boss xuất hiện mỗi 5 Wave.
+* **GM TOOL VIP PRO:** Bảng điều khiển Admin tối cao (Yêu cầu Key xác thực).
+* **Anti-Freeze:** Công nghệ dừng Engine thông minh giúp máy không bị treo khi hết HP.
 
-## 🌟 Có gì mới trong bản V9.1.3?
+## 🕹️ Cách chơi
+1.  **Triệu hồi:** Dùng điểm SP để triệu hồi xúc xắc ngẫu nhiên lên bàn cờ.
+2.  **Gộp xúc xắc:** Kéo hai xúc xắc cùng loại và cùng số sao (dots) đè lên nhau để nâng cấp bậc.
+3.  **Phòng thủ:** Xúc xắc sẽ tự động bắn hạ kẻ địch đi ngang qua. Đừng để máu (HP) về 0!
+4.  **Cửa hàng:** Tích lũy SP để mua các loại xúc xắc mạnh hơn hoặc thay đổi ngoại hình với Skin VIP.
 
-### 🎞️ Đồ họa Cinematic Motion
-* **Menu Chuyển động:** Hiệu ứng hậu cảnh không gian 3D với các vì sao lấp lánh di chuyển liên tục.
-* **Tiêu đề Floating:** Chữ "Random Dice Ultra" có hiệu ứng trôi nổi và tia sáng chạy ngang cực kỳ chuyên nghiệp.
-* **Giao diện Glassmorphism:** Các nút bấm mờ ảo với hiệu ứng kính hiện đại, tối ưu cho trải nghiệm chạm trên điện thoại.
+## 🛠️ Công nghệ sử dụng
+* **HTML5 & CSS3:** Giao diện người dùng mượt mà và linh hoạt.
+* **Canvas API:** Xử lý đồ họa game 60 FPS.
+* **JavaScript:** Logic game, AI kẻ địch và hệ thống lưu trữ kỷ lục (`localStorage`).
 
-### 💀 Hệ thống Game Over Mới
-* Khi hết máu (HP), một bảng thông báo **Game Over** đẹp mắt sẽ hiện ra.
-* **Chơi lại ngay:** Nút Restart cho phép bạn đặt lại toàn bộ trận đấu (SP, HP, Wave) và bắt đầu lại ngay lập tức mà không cần tải lại trang.
+## 🔑 Quyền Admin
+Hệ thống tích hợp bảng điều khiển **CONSOLE** dành riêng cho nhà phát triển để kiểm tra lỗi và cân bằng game.
+* *Lưu ý: Cần có Key bí mật để truy cập.*
 
-### ⚔️ Sức mạnh 30 Loại Xúc Xắc
-* Đầy đủ 30 loại xúc xắc với các chỉ số Sát thương (`dmg`) và Tốc độ (`spd`) khác nhau.
-* **Eternal & Chaos:** Được fix lỗi tấn công, sở hữu tốc độ bắn nhanh nhất game để đối đầu với các siêu Boss.
-* **Phân cấp độ hiếm:** Bình thường (Trắng), VIP (Cam), và Ultra (Đỏ/Tím) với hiệu ứng phát sáng đặc trưng.
-
-### 💾 Hệ thống Lưu Game & GM Tool
-* **Auto-Save:** Tự động lưu trạng thái bàn cờ và thông số sau mỗi Wave Boss.
-* **GM Verification:** Bảng xác thực bảo mật với Key `*********`.
-* **GM Update:** Bổ sung nút **QUAY LẠI (Hủy)** trong bảng nhập Key để tránh bấm nhầm.
-
----
-
-## 🎮 Hướng dẫn chơi
-
-1.  **Khởi đầu:** Chọn **CHƠI MỚI** để bắt đầu từ Wave 1 hoặc **TIẾP TỤC** để nạp lại trận đấu đang dang dở.
-2.  **Triệu hồi:** Dùng 50 SP để triệu hồi ngẫu nhiên xúc xắc lên bàn cờ.
-3.  **Ghép quân (Merge):** Kéo thả 2 viên xúc xắc **cùng loại và cùng số sao** để nâng cấp lên cấp bậc cao hơn (tối đa 7 sao).
-4.  **Cửa hàng:** Tích lũy SP để mua trực tiếp các loại xúc xắc cực mạnh như **Eternal**, **Chaos** hoặc **God**.
-5.  **Bảo vệ HP:** Mỗi quái vật thoát khỏi bản đồ sẽ trừ 1 HP. Đừng để máu về 0!
+## 👨‍💻 Tác giả
+* **Developer:** Khang
+* **Version:** 12.0 (Final Anti-Freeze Edition)
+* **Dành tặng cho:** Phương Anh ❤️
 
 ---
-
-## 🛠 Thông số Kỹ thuật
-
-* **Ngôn ngữ:** JavaScript (ES6+), HTML5 Canvas, CSS3 Animation.
-* **Môi trường:** Tối ưu hóa cho **Acode** và **Pydroid 3** trên Android.
-* **Lưu trữ:** Sử dụng `LocalStorage` để lưu dữ liệu trận đấu bền vững.
-
----
-
-## 📜 Danh sách cập nhật (Changelog)
-
-* **v9.1.3:** Thêm bảng Game Over và nút Chơi lại ngay.
-* **v9.1.2:** Fix lỗi logic tấn công của 30 loại xúc xắc.
-* **v9.1.0:** Nâng cấp đồ họa Cinematic Menu và hiệu ứng chuyển động.
-* **v8.0.0:** Tích hợp hệ thống Save/Load và Menu chính.
-
----
-**Phát triển bởi:** Khangpanh68 (Mobile Game Project
-
-**Dành cho:** Khangpanh68 (Mobile Game Project)
+© 2026 Random Dice Ultra Project. Built with passion.
