@@ -1,321 +1,239 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Random Dice Ultra V9.1.3 - Game Over Update</title>
+    <title>Random Dice Ultra V12.0 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        :root { 
-            --p: #1e293b; --a: #f1c40f; --d: #ef4444; --s: #10b981; 
-            --u: #ff0000; --v: #f97316; --gm: #00ecff; --glass: rgba(255, 255, 255, 0.1);
-        }
+        :root { --p: #1e293b; --a: #f1c40f; --d: #ef4444; --s: #10b981; --u: #ff0000; --v: #f97316; --gm: #00ecff; --glass: rgba(255, 255, 255, 0.1); }
         body { margin: 0; background: #020617; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; touch-action: none; }
-
-        /* MENU CHUYỂN ĐỘNG (V9.1.2) */
-        #mainMenu { 
-            position: fixed; inset: 0; 
-            background: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
-            z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-        .menu-title { font-size: 40px; font-weight: 900; color: var(--a); text-shadow: 0 0 20px var(--u); margin-bottom: 50px; text-align: center; animation: titleFloat 4s infinite; }
-        @keyframes titleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         
-        .menu-btn { 
-            width: 260px; padding: 18px; margin: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 15px;
-            background: var(--glass); backdrop-filter: blur(10px); font-weight: 900; font-size: 20px; cursor: pointer; color: white; transition: 0.3s;
-        }
-        .btn-cont-off { opacity: 0.3; pointer-events: none; }
+        #mainMenu { position: fixed; inset: 0; background: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .menu-title { font-size: 38px; font-weight: 900; color: var(--a); text-shadow: 0 0 20px var(--u); text-align: center; margin-bottom: 20px; }
+        .menu-btn { width: 260px; padding: 18px; margin: 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; background: var(--glass); backdrop-filter: blur(10px); font-weight: 900; font-size: 20px; cursor: pointer; color: white; text-transform: uppercase; }
 
-        /* MÀN HÌNH THUA CUỘC V9.1.3 */
-        #gameOverUI {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-            z-index: 15000; flex-direction: column; align-items: center; justify-content: center;
-            backdrop-filter: blur(8px);
-        }
-        .death-box {
-            background: #1e293b; padding: 40px; border-radius: 25px; border: 3px solid var(--d);
-            text-align: center; box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);
-        }
-        .death-title { font-size: 35px; font-weight: 900; color: var(--d); margin-bottom: 10px; text-transform: uppercase; }
-        .restart-btn {
-            background: var(--s); color: white; padding: 15px 30px; border-radius: 12px;
-            border: none; font-weight: 900; font-size: 18px; cursor: pointer; margin-top: 20px;
-            box-shadow: 0 5px 0 #059669;
-        }
-        .restart-btn:active { transform: translateY(4px); box-shadow: none; }
+        /* GM LOGIN BOX */
+        #gmAuthUI { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.9); z-index: 200000; flex-direction: column; align-items: center; justify-content: center; }
+        .auth-panel { background: #1e293b; padding: 30px; border-radius: 20px; border: 2px solid var(--gm); width: 80%; max-width: 320px; text-align: center; }
+        .auth-input { padding: 15px; width: 90%; margin-bottom: 15px; text-align: center; border-radius: 10px; border: none; font-weight: bold; font-size: 16px; }
+        .auth-btn-ok { background: var(--gm); color: #000; border: none; padding: 15px; width: 100%; border-radius: 12px; font-weight: 900; cursor: pointer; margin-bottom: 10px; }
+        .auth-btn-back { background: var(--d); color: white; border: none; padding: 12px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
-        /* GM AUTH */
-        #gmAuthUI { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 10000; flex-direction: column; align-items: center; justify-content: center; }
-        .auth-box { background: #1e293b; padding: 25px; border-radius: 20px; border: 2px solid var(--gm); text-align: center; width: 280px; }
-        .auth-input { padding: 12px; border-radius: 8px; border: none; margin-bottom: 15px; width: 90%; text-align: center; background: #0f172a; color: white; }
+        /* GM VIP CONSOLE */
+        #gmVIPUI { display: none; position: fixed; inset: 0; background: rgba(2, 6, 23, 0.98); z-index: 1000000; flex-direction: column; align-items: center; justify-content: center; }
+        .gm-panel { background: #0f172a; padding: 25px; border-radius: 20px; border: 2px solid var(--gm); width: 85%; max-width: 400px; position: relative; }
+        .gm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .gm-btn-pro { padding: 15px; border-radius: 10px; border: none; font-weight: 900; color: black; font-size: 13px; text-transform: uppercase; }
+        .gm-exit-footer { width: 100%; margin-top: 25px; padding: 18px; background: var(--d); color: white; border: none; border-radius: 12px; font-weight: 900; cursor: pointer; }
 
-        /* GAME UI */
-        .header { width: 100%; padding: 12px; display: flex; justify-content: space-around; background: var(--p); border-bottom: 2px solid var(--gm); }
-        canvas { background: #0f172a; border: 3px solid #334155; margin-top: 5px; border-radius: 20px; }
-        .footer { margin: 10px; display: flex; gap: 8px; width: 95%; }
-        .footer button { flex: 1; padding: 15px; font-size: 14px; font-weight: bold; border: none; color: white; border-radius: 12px; }
-        
-        #gmMenu { display: none; position: fixed; top: 60px; right: 10px; background: rgba(0,0,0,0.95); border: 2px solid var(--gm); padding: 10px; border-radius: 10px; z-index: 2000; }
-        #gmToggle { position: fixed; top: 15px; right: 10px; background: var(--gm); color: black; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; z-index: 9000; }
-        #shopUI { display: none; position: fixed; inset: 0; background: rgba(2,6,23,0.98); z-index: 3000; overflow-y: auto; padding: 20px; }
+        #shopUI { position: fixed; inset: 0; background: #020617; z-index: 15000; display: none; flex-direction: column; padding: 20px; }
+        .shop-header { display: flex; gap: 10px; margin-bottom: 20px; }
+        .shop-tab { flex: 1; padding: 15px; background: var(--p); border: 2px solid #334155; border-radius: 12px; font-weight: bold; text-align: center; }
+        .tab-on { border-color: var(--gm); background: #334155; color: var(--gm); }
+        .shop-container { flex: 1; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .shop-card { background: #1e293b; padding: 12px; border-radius: 15px; text-align: center; border: 1px solid #334155; }
+
+        .header { width: 100%; padding: 10px; display: flex; justify-content: space-around; background: var(--p); border-bottom: 2px solid var(--gm); position: relative; z-index: 100; }
+        canvas { background: transparent; border: 2px solid #334155; margin: 10px auto; display: block; border-radius: 15px; }
+        .footer { display: flex; gap: 8px; width: 95%; margin: 0 auto; }
+        .footer button { flex: 1; padding: 16px; font-size: 15px; font-weight: bold; border: none; color: white; border-radius: 12px; }
+        #gmToggle { position: fixed; top: 12px; right: 5px; background: var(--gm); color: black; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; z-index: 16000; }
+        #gameOverUI { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 200000; flex-direction: column; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
 
     <div id="mainMenu">
-        <div class="menu-title">RANDOM DICE<br>ULTRA V9.1.3</div>
-        <button class="menu-btn" style="border-left: 5px solid var(--s);" onclick="handleGameStart(true)">CHƠI MỚI</button>
-        <button class="menu-btn" style="border-left: 5px solid var(--v);" id="contBtn" onclick="handleGameStart(false)">TIẾP TỤC</button>
-    </div>
-
-    <div id="gameOverUI">
-        <div class="death-box">
-            <div class="death-title">BẠN ĐÃ THUA!</div>
-            <p style="opacity: 0.8;">Wave đạt được: <span id="finalWave" style="color: var(--a);">1</span></p>
-            <button class="restart-btn" onclick="restartGame()">CHƠI LẠI NGAY</button>
-            <button onclick="location.reload()" style="background:none; border:none; color:white; margin-top:15px; display:block; width:100%; opacity:0.5; font-size:12px;">VỀ MENU CHÍNH</button>
-        </div>
+        <div class="menu-title">RANDOM DICE<br>ULTRA V12.0</div>
+        <div id="bestScoreText" style="color:var(--a); margin-bottom:15px; font-weight: bold;">Kỷ lục: Wave 0</div>
+        <button class="menu-btn" onclick="gameStart(true)">CHƠI MỚI</button>
+        <button class="menu-btn" onclick="gameStart(false)">TIẾP TỤC</button>
+        <button class="menu-btn" onclick="openAuth()">GM VIP PRO</button>
     </div>
 
     <div id="gmAuthUI">
-        <div class="auth-box">
-            <h3 style="color: var(--gm); margin-top:0;">XÁC THỰC GM</h3>
-            <input type="password" id="gmKeyInput" class="auth-input" placeholder="KEY: KHANG***">
-            <div style="display:flex; gap:10px;">
-                <button onclick="checkGMKey()" style="flex:1; background:var(--gm); padding:10px; border:none; border-radius:8px; font-weight:bold;">XÁC THỰC</button>
-                <button onclick="closeAuth()" style="flex:1; background:var(--d); color:white; padding:10px; border:none; border-radius:8px;">HỦY</button>
-            </div>
+        <div class="auth-panel">
+            <h3 style="color:var(--gm); margin-top: 0; margin-bottom: 20px;">Nhập Code </h3>
+            <input type="password" id="gmKeyInput" placeholder="KEY: KHANG..." class="auth-input">
+            <button onclick="checkGMKey()" class="auth-btn-ok">OK</button>
+            <button onclick="document.getElementById('gmAuthUI').style.display='none'" class="auth-btn-back">QUAY LẠI</button>
         </div>
     </div>
 
-    <div id="gmToggle" onclick="openAuth()">GM TOOL</div>
-    <div id="gmMenu">
-        <button onclick="gmAddSP()" style="background:var(--gm); width:100%; margin:5px 0; border:none; padding:10px; border-radius:5px; font-weight:bold;">+5000 SP</button>
-        <button onclick="gmUpgradeHP()" style="background:var(--gm); width:100%; margin:5px 0; border:none; padding:10px; border-radius:5px; font-weight:bold;">MAX HP +5</button>
-        <button onclick="gmClearEnemies()" style="background:var(--gm); width:100%; margin:5px 0; border:none; padding:10px; border-radius:5px; font-weight:bold;">DIỆT QUÁI</button>
+    <div id="gmVIPUI">
+        <div class="gm-panel">
+            <h2 style="color:var(--gm); margin-top:0; text-align: center;">GM CONSOLE</h2>
+            <div class="gm-grid">
+                <button class="gm-btn-pro" style="background: #22c55e;" onclick="gmMoney()">+1M SP</button>
+                <button class="gm-btn-pro" style="background: #ef4444;" onclick="gmGod()">GOD MODE</button>
+                <button class="gm-btn-pro" style="background: #eab308;" onclick="gmNuke()">DIỆT QUÁI</button>
+                <button class="gm-btn-pro" style="background: #a855f7;" onclick="gmSkip()">+10 WAVE</button>
+                <button class="gm-btn-pro" style="background: #06b6d4;" onclick="gmReset()">1000 HP</button>
+                <button class="gm-btn-pro" style="background: #f43f5e;" onclick="gmClearBoard()">XÓA BÀN</button>
+            </div>
+            <button onclick="closeGMVIP()" class="gm-exit-footer">QUAY LẠI GAME</button>
+        </div>
     </div>
 
+    <div id="shopUI">
+        <div class="shop-header">
+            <div id="tab1" class="shop-tab tab-on" onclick="switchTab('dice')">XÚC XẮC</div>
+            <div id="tab2" class="shop-tab" onclick="switchTab('skin')">SKINS VIP</div>
+        </div>
+        <div id="diceList" class="shop-container"></div>
+        <div id="skinList" class="shop-container" style="display: none;"></div>
+        <button onclick="toggleShop()" style="background:var(--d); color:white; padding:18px; border:none; border-radius:15px; font-weight:900; margin-top:10px;">ĐÓNG SHOP</button>
+    </div>
+
+    <div id="gmToggle" onclick="openGMVIP()">Tool Gm</div>
+
     <div class="header">
-        <div style="color: var(--d); font-weight: bold;">❤️ <span id="hpVal">3</span>/<span id="maxHpVal">3</span></div>
-        <div style="color: var(--s); font-weight: bold;">💎 <span id="spVal">100</span></div>
-        <div style="color: var(--gm); font-weight: bold;">🌊 WAVE <span id="wv">1</span></div>
+        <div style="color:var(--d); font-weight:bold; font-size: 18px;">❤️ <span id="hpVal">1000</span></div>
+        <div style="color:var(--s); font-weight:bold; font-size: 18px;">💎 <span id="spVal">1000</span></div>
+        <div style="color:var(--gm); font-weight:bold; font-size: 18px;">🌊 <span id="wv">1</span></div>
     </div>
 
     <canvas id="gameCanvas"></canvas>
 
     <div class="footer">
-        <button style="background: #f59e0b;" onclick="spawnDice()">TRIỆU HỒI</button>
-        <button style="background: var(--u);" onclick="toggleShop()">SHOP (30)</button>
+        <button style="background:#f59e0b; box-shadow: 0 4px 0 #b45309;" onclick="spawn()">TRIỆU HỒI</button>
+        <button style="background:var(--u); box-shadow: 0 4px 0 #990000;" onclick="toggleShop()">CỬA HÀNG</button>
     </div>
 
-    <div id="shopUI">
-        <h2 style="text-align: center; color: var(--gm);">SHOP XÚC XẮC</h2>
-        <div id="shopList" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-bottom: 80px;"></div>
-        <button onclick="toggleShop()" style="background:var(--d); width:100%; position:fixed; bottom:0; left:0; padding:20px; font-weight:bold; border:none; color:white;">ĐÓNG</button>
+    <div id="gameOverUI">
+        <div style="background:#1e293b; padding:40px; border-radius:25px; text-align:center; border: 3px solid var(--d);">
+            <h1 style="color:var(--d); margin:0;">THẤT BẠI!</h1>
+            <p style="font-size:20px; margin:20px 0;">Wave đạt được: <span id="resWv" style="color:var(--a)">1</span></p>
+            <button onclick="location.reload()" style="background:var(--s); color:white; padding:15px 30px; border:none; border-radius:12px; font-weight:bold; font-size:18px;">VỀ MENU</button>
+        </div>
     </div>
 
 <script>
-/** --- DATA 30 LOẠI XÚC XẮC (V9.1.2) --- **/
-const diceData = [];
-const colors = ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa', '#fb923c', '#f472b6', '#2dd4bf'];
-const names = ['Lửa', 'Băng', 'Gió', 'Sét', 'Độc', 'Sắt', 'Quang', 'Mìn', 'Nước', 'Đá', 'Súng', 'Bom', 'Tử Thần', 'Khiên', 'Bão', 'Hố Đen', 'Rồng', 'Thần', 'Joker', 'Solar', 'Plasma', 'Titan', 'Neon', 'Galaxy', 'Shadow', 'Phoenix', 'Chaos', 'Eternal', 'God', 'Cổ Đại'];
+/** --- DATA --- **/
+const diceColors = ['#FF4D4D','#33FF57','#3357FF','#FF33FF','#33FFF3','#FF3399','#9933FF','#33FF99','#FF9933','#33FFCC','#9933CC','#FF3333','#66FF66','#6666FF','#FFFF33','#33FFFF','#FF00FF','#E0E0E0','#B0B0B0','#FF5050','#CCCC00','#00CC00','#CC00CC','#00CCCC','#0000CC','#FF6600','#3CB371','#EE82EE','#FFD700','#00CED1'];
+const names = ['Lửa','Băng','Gió','Sét','Độc','Sắt','Quang','Mìn','Nước','Đá','Súng','Bom','Tử Thần','Khiên','Bão','Hố Đen','Rồng','Thần','Joker','Solar','Plasma','Titan','Neon','Galaxy','Shadow','Phoenix','Chaos','Eternal','God','Ancient'];
+const diceData = names.map((n, i) => ({ id: i, name: n, color: diceColors[i], dmg: 100 + i * 65, spd: Math.max(3, 40 - i), buy: 100 + i * 400 }));
+const skins = [{id:'def', name:'Classic', p:0, o:true}, {id:'neon', name:'Neon Pulse', p:10000, o:false}, {id:'dia', name:'Diamond', p:20000, o:false}, {id:'hack', name:'Cyber Grid', p:30000, o:false}, {id:'ghost', name:'Ethereal', p:40000, o:false}, {id:'ultra', name:'Godly Aura', p:50000, o:false}];
 
-for(let i=0; i<30; i++) {
-    let type = i >= 25 ? 'u' : (i >= 20 ? 'v' : 'n');
-    diceData.push({
-        id: i,
-        name: names[i] || 'Dice ' + i,
-        color: i === 26 ? '#4c1d95' : (i === 27 ? '#7e22ce' : (i === 28 ? '#ff0000' : colors[i % colors.length])),
-        dmg: 10 + i * 15 + (type === 'u' ? 1200 : 0),
-        spd: Math.max(4, 50 - i * 2), // Eternal & Chaos cực nhanh
-        buy: 100 + i * 200,
-        type: type
-    });
-}
+let sp = 1000, hp = 1000, wave = 1, frame = 0, gameRunning = false, curSkin = 'def', isGMUnlocked = false, animId = null;
+const cvs = document.getElementById('gameCanvas'), ctx = cvs.getContext('2d');
+cvs.width = 350; cvs.height = 450;
+const sz = 70, col = 5, row = 3, boardY = 200;
+let board = Array(15).fill(null), enemies = [], bullets = [], drag = -1, mx = 0, my = 0;
 
-const cvs = document.getElementById('gameCanvas');
-const ctx = cvs.getContext('2d');
-cvs.width = 360; cvs.height = 460;
+/** --- LOGIC HỆ THỐNG --- **/
+function openAuth() { document.getElementById('gmAuthUI').style.display='flex'; }
+function checkGMKey() { if(document.getElementById('gmKeyInput').value === "Khangpanh68") { isGMUnlocked = true; document.getElementById('gmAuthUI').style.display='none'; openGMVIP(); } else alert("SAI!"); }
+function openGMVIP() { if(isGMUnlocked) document.getElementById('gmVIPUI').style.display='flex'; else openAuth(); }
+function closeGMVIP() { document.getElementById('gmVIPUI').style.display='none'; }
+function gmMoney() { sp += 100000000; updateUI(); }
+function gmGod() { hp = 99999999; updateUI(); }
+function gmNuke() { enemies = []; bullets = []; }
+function gmSkip() { wave += 10; updateUI(); }
+function gmReset() { hp = 1000; updateUI(); }
+function gmClearBoard() { board.fill(null); }
 
-let sp = 100, hp = 3, maxHp = 3, wave = 1, frame = 0, isGMUnlocked = false, gameRunning = false;
-const sz = 72, c = 5, r = 3, bY = 200;
-let board = Array(c * r).fill(null), enemies = [], bullets = [], drag = -1, tx = 0, ty = 0;
-
-/** --- LOGIC MENU, SAVE & RESTART --- **/
-function handleGameStart(isNew) {
-    const menu = document.getElementById('mainMenu');
-    menu.style.opacity = '0';
-    setTimeout(() => {
-        menu.style.visibility = 'hidden';
-        if (isNew) {
-            sp = 100; hp = 10; maxHp = 1000; wave = 1; board = Array(c * r).fill(null);
-            localStorage.removeItem('khang_dice_save');
-        } else loadGame();
-        gameRunning = true; updateUI();
-    }, 800);
-}
-
-// CẬP NHẬT RESTART GAME
-function restartGame() {
-    sp = 100; hp = 10; maxHp = 1000; wave = 1; 
-    board = Array(c * r).fill(null);
-    enemies = []; bullets = [];
-    localStorage.removeItem('khang_dice_save');
-    document.getElementById('gameOverUI').style.display = 'none';
-    gameRunning = true;
-    updateUI();
-}
-
-function saveGame() { localStorage.setItem('khang_dice_save', JSON.stringify({ sp, hp, maxHp, wave, board })); }
-function loadGame() {
-    const saved = localStorage.getItem('khang_dice_save');
-    if (saved) {
-        const data = JSON.parse(saved);
-        sp=data.sp; hp=data.hp; maxHp=data.maxHp; wave=data.wave; board=data.board;
-    }
-}
-
-/** --- GM & SHOP --- **/
-function openAuth() { if(isGMUnlocked) toggleGM(); else document.getElementById('gmAuthUI').style.display='flex'; }
-function closeAuth() { document.getElementById('gmAuthUI').style.display='none'; }
-function checkGMKey() { 
-    if(document.getElementById('gmKeyInput').value === "Khangpanh68") { 
-        isGMUnlocked=true; closeAuth(); toggleGM(); 
-    } else alert("SAI KEY!"); 
-}
-function toggleGM() { let m=document.getElementById('gmMenu'); m.style.display=m.style.display==='block'?'none':'block'; }
-function gmAddSP() { sp += 5000; updateUI(); }
-function gmUpgradeHP() { maxHp += 5; hp = maxHp; updateUI(); }
-function gmClearEnemies() { enemies = []; }
-
-function toggleShop() { let s=document.getElementById('shopUI'); s.style.display=s.style.display==='block'?'none':'block'; if(s.style.display==='block') initShop(); }
 function initShop() {
-    document.getElementById('shopList').innerHTML = diceData.map(d => `
-        <div style="background:#1e293b; padding:10px; border-radius:12px; border:1px solid #334155; text-align:center;">
-            <div style="background:${d.color};width:20px;height:20px;margin:auto;border-radius:4px;"></div>
-            <p style="font-size:11px;margin:5px 0"><b>${d.name}</b></p>
-            <button onclick="buyFromShop(${d.id})" style="background:var(--s);font-size:10px;padding:5px;width:100%;border:none;border-radius:5px;color:white;">${d.buy} SP</button>
-        </div>
-    `).join('');
+    const diceList = document.getElementById('diceList'), skinList = document.getElementById('skinList');
+    diceList.innerHTML = diceData.map(d => `<div class="shop-card" style="border-top: 4px solid ${d.color}"><b>${d.name}</b><button style="background:var(--s); color:white; border:none; padding:8px; width:100%; border-radius:5px; margin-top:5px;" onclick="buyD(${d.id})">${d.buy} SP</button></div>`).join('');
+    skinList.innerHTML = skins.map(s => `<div class="shop-card"><b style="color:var(--a)">${s.name}</b><br>${s.o ? `<button style="background:var(--gm); border:none; padding:8px; width:100%; border-radius:5px; margin-top:5px; color:#000;" onclick="setS('${s.id}')">${curSkin === s.id ? 'ĐANG DÙNG' : 'SỬ DỤNG'}</button>` : `<button style="background:var(--v); color:white; border:none; padding:8px; width:100%; border-radius:5px; margin-top:5px;" onclick="buyS('${s.id}',${s.p})">${s.p} SP</button>`}</div>`).join('');
 }
-function buyFromShop(id) {
-    let d = diceData.find(x => x.id === id);
-    if (sp < d.buy) return;
-    let empty = board.indexOf(null);
-    if (empty === -1) return;
-    sp -= d.buy; board[empty] = JSON.parse(JSON.stringify(d)); board[empty].dots = 1;
-    updateUI(); toggleShop();
-}
-function spawnDice() {
-    if (sp < 50) return;
-    let free = board.map((v, i) => v === null ? i : null).filter(v => v !== null);
-    if (free.length === 0) return;
-    let i = free[Math.floor(Math.random()*free.length)];
-    board[i] = JSON.parse(JSON.stringify(diceData[Math.floor(Math.random()*diceData.length)]));
-    board[i].dots = 1; sp -= 50; updateUI();
+function switchTab(t) { document.getElementById('diceList').style.display = t === 'dice' ? 'grid' : 'none'; document.getElementById('skinList').style.display = t === 'skin' ? 'grid' : 'none'; document.getElementById('tab1').className = t === 'dice' ? 'shop-tab tab-on' : 'shop-tab'; document.getElementById('tab2').className = t === 'skin' ? 'shop-tab tab-on' : 'shop-tab'; }
+function buyD(id) { let empty = board.indexOf(null); let d = diceData.find(x => x.id === id); if(sp >= d.buy && empty !== -1) { sp -= d.buy; board[empty] = {...JSON.parse(JSON.stringify(d)), dots:1}; updateUI(); } }
+function buyS(id, p) { if(sp >= p) { sp -= p; skins.find(x=>x.id===id).o = true; updateUI(); initShop(); setS(id); } }
+function setS(id) { curSkin = id; initShop(); }
+function toggleShop() { let s = document.getElementById('shopUI'); s.style.display = s.style.display === 'flex' ? 'none' : 'flex'; if(s.style.display==='flex') initShop(); }
+
+/** --- ENGINE RENDER (FIX TREO MÁY) --- **/
+function drawDice(x, y, d) {
+    ctx.save();
+    let grd = ctx.createRadialGradient(x+sz/2, y+sz/2, 5, x+sz/2, y+sz/2, 30);
+    grd.addColorStop(0, "white"); grd.addColorStop(0.3, d.color); grd.addColorStop(1, "black");
+    ctx.fillStyle = grd; ctx.beginPath();
+    let r = curSkin === 'neon' ? 30 : 12;
+    if(curSkin === 'dia') { ctx.moveTo(x+sz/2, y+8); ctx.lineTo(x+sz-8, y+sz/2); ctx.lineTo(x+sz/2, y+sz-8); ctx.lineTo(x+8, y+sz/2); ctx.closePath(); }
+    else { ctx.roundRect ? ctx.roundRect(x+8, y+8, sz-16, sz-16, r) : ctx.rect(x+8, y+8, sz-16, sz-16); }
+    ctx.fill();
+    ctx.fillStyle = "white"; ctx.textAlign = "center"; ctx.font = "bold 10px Arial"; ctx.fillText(d.name, x+sz/2, y+sz/2 - 2);
+    ctx.font = "bold 22px Arial"; ctx.fillText(d.dots, x+sz/2, y+sz-14);
+    ctx.restore();
 }
 
-function updateUI() {
-    document.getElementById('spVal').innerText = sp;
-    document.getElementById('hpVal').innerText = hp;
-    document.getElementById('maxHpVal').innerText = maxHp;
-    document.getElementById('wv').innerText = wave;
-}
-
-/** --- ENGINE CORE --- **/
 function render() {
-    requestAnimationFrame(render);
-    if (!gameRunning) return;
-
+    if(!gameRunning) return; 
+    animId = requestAnimationFrame(render);
     frame++; ctx.clearRect(0,0,cvs.width,cvs.height);
-    if(frame%100===0){ enemies.push(new Enemy(frame%1000===0)); if(frame%1000===0) { wave++; saveGame(); } }
-
-    for(let i=0; i<board.length; i++){
-        let x=(i%c)*sz, y=bY+Math.floor(i/c)*sz;
-        ctx.strokeStyle='#334155'; ctx.strokeRect(x+2,y+2,sz-4,sz-4);
-        if(board[i] && i !== drag) drawD(x,y,board[i]);
-    }
-
-    enemies = enemies.filter(e => {
-        e.x += e.spd;
-        if(e.x > cvs.width){ hp--; updateUI(); return false; }
-        if(e.hp <= 0){ sp += e.boss?200:20; updateUI(); return false; }
-        ctx.fillStyle=e.boss?'#475569':'#1e293b'; ctx.fillRect(e.x,e.y,e.s,e.s);
-        ctx.fillStyle='#ef4444'; ctx.fillRect(e.x,e.y-10,(e.hp/e.mHp)*e.s,5);
-        return true;
-    });
-
-    if (enemies.length > 0) {
-        let target = enemies.reduce((a,b)=>a.x>b.x?a:b);
-        board.forEach((d, i) => {
-            if (d) {
-                let fr = Math.max(2, d.spd - (d.dots - 1) * 3);
-                if (frame % fr === 0) {
-                    bullets.push({ x:(i%c)*sz+sz/2, y:bY+Math.floor(i/c)*sz+sz/2, t:target, d:d.dmg*d.dots, c:d.color });
-                }
-            }
-        });
-    }
-
-    bullets = bullets.filter(b => {
-        let dx=b.t.x+b.t.s/2-b.x, dy=b.t.y+b.t.s/2-b.y, dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<12){ b.t.hp-=b.d; return false; }
-        b.x+=(dx/dist)*15; b.y+=(dy/dist)*15;
-        ctx.fillStyle=b.c; ctx.beginPath(); ctx.arc(b.x,b.y,4,0,Math.PI*2); ctx.fill(); return true;
-    });
-
-    if(drag!==-1) drawD(tx-35, ty-35, board[drag], true);
     
-    // XỬ LÝ KHI THUA
-    if(hp<=0){
-        gameRunning = false;
-        document.getElementById('finalWave').innerText = wave;
-        document.getElementById('gameOverUI').style.display = 'flex';
-        localStorage.removeItem('khang_dice_save');
+    // Grid
+    for(let i=0; i<15; i++) {
+        let x=(i%col)*sz, y=boardY+Math.floor(i/col)*sz; ctx.strokeStyle="#334155"; ctx.strokeRect(x+2,y+2,sz-4,sz-4);
+        if(board[i] && i !== drag) drawDice(x,y,board[i]);
+    }
+    
+    // Spawn Kẻ Địch
+    if(frame % 90 === 0) {
+        let isBoss = (wave % 5 === 0 && enemies.filter(e=>e.boss).length === 0);
+        enemies.push({ x:-30, y:80, boss: isBoss, hp: Math.floor((isBoss ? 2000 : 300) * (1 + wave * 0.9)), mHp: Math.floor((isBoss ? 2000 : 300) * (1 + wave * 0.9)), s: isBoss ? 50 : 35 });
+    }
+    
+    if(frame % 1000 === 0) { wave++; updateUI(); }
+    
+    enemies = enemies.filter(e => {
+        e.x += 1.5 + (wave * 0.15);
+        if(e.x > cvs.width) { hp -= e.boss ? 200 : 50; updateUI(); return false; }
+        if(e.hp <= 0) { sp += 200; updateUI(); return false; }
+        ctx.fillStyle = e.boss ? "#ef4444" : "#475569"; ctx.fillRect(e.x, e.y, e.s, e.s);
+        ctx.fillStyle = "white"; ctx.textAlign = "center"; ctx.font = "bold 11px Arial";
+        ctx.fillText(Math.floor(e.hp), e.x + e.s/2, e.y + e.s/2 + 4); return true;
+    });
+
+    // Bắn đạn
+    board.forEach((d, i) => { if(d && enemies.length > 0 && frame % d.spd === 0) bullets.push({x:(i%col)*sz+sz/2, y:boardY+Math.floor(i/col)*sz+sz/2, target:enemies[0], dmg:d.dmg*d.dots, color:d.color}); });
+    bullets = bullets.filter(b => {
+        if(!enemies.includes(b.target)) return false; 
+        let dx = b.target.x + b.target.s/2 - b.x, dy = b.target.y + b.target.s/2 - b.y, dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist < 10) { b.target.hp -= b.dmg; return false; }
+        b.x += dx/dist * 22; b.y += dy/dist * 22; 
+        ctx.fillStyle = b.color; ctx.beginPath(); ctx.arc(b.x, b.y, 6, 0, Math.PI*2); ctx.fill(); return true;
+    });
+
+    if(drag !== -1) drawDice(mx-35, my-35, board[drag]);
+
+    // XỬ LÝ GAME OVER (CHỐNG TREO)
+    if(hp <= 0) { 
+        hp = 0; updateUI(); 
+        gameRunning = false; 
+        cancelAnimationFrame(animId); // Dừng engine ngay lập tức
+        enemies = []; bullets = []; // Xóa rác dữ liệu
+        document.getElementById('resWv').innerText = wave;
+        document.getElementById('gameOverUI').style.display='flex'; 
     }
 }
 
-function drawD(x,y,d,dragging=false){
-    ctx.save(); if(dragging) ctx.globalAlpha=0.7;
-    ctx.fillStyle=d.color; if(d.type==='u' || d.type==='v'){ctx.shadowBlur=15; ctx.shadowColor=d.color;}
-    ctx.beginPath(); ctx.roundRect(x+8,y+8,sz-16,sz-16,12); ctx.fill();
-    ctx.fillStyle="#fff"; ctx.font="bold 20px Arial"; ctx.textAlign="center";
-    ctx.fillText(d.dots, x+sz/2, y+sz/2+7); ctx.restore();
+function updateUI() { document.getElementById('spVal').innerText = sp; document.getElementById('hpVal').innerText = hp; document.getElementById('wv').innerText = wave; }
+function gameStart(isNew) {
+    document.getElementById('mainMenu').style.display = 'none';
+    if(isNew) { sp=1000; hp=1000; wave=1; board.fill(null); enemies=[]; bullets=[]; curSkin = 'def'; }
+    gameRunning = true; updateUI(); render();
+}
+function spawn() { 
+    let empty = board.indexOf(null); 
+    if(sp >= 50 && empty !== -1) { 
+        sp -= 50; 
+        let isVIP = Math.random() < 0.1;
+        let diceIndex = isVIP ? Math.floor(Math.random() * 10) + 20 : Math.floor(Math.random() * 15);
+        board[empty] = {...JSON.parse(JSON.stringify(diceData[diceIndex])), dots:1}; updateUI(); 
+    } 
 }
 
-class Enemy {
-    constructor(boss=false){
-        this.x=-40; this.y=80; this.boss=boss; this.s=boss?45:25;
-        this.spd=boss?0.8:1.5+(wave*0.1); this.mHp=(boss?2500:100)*(1+wave*0.5); this.hp=this.mHp;
-    }
-}
+// TOUCH
+cvs.addEventListener('touchstart', e => { let r = cvs.getBoundingClientRect(); mx = e.touches[0].clientX - r.left; my = e.touches[0].clientY - r.top; let i = Math.floor((my-boardY)/sz)*col + Math.floor(mx/sz); if(board[i]) drag = i; });
+cvs.addEventListener('touchend', () => { if(drag === -1) return; let i = Math.floor((my-boardY)/sz)*col + Math.floor(mx/sz); if(i >= 0 && i < 15 && i !== drag && board[i] && board[i].id === board[drag].id && board[i].dots === board[drag].dots && board[i].dots < 7) { board[i].dots++; board[drag] = null; } drag = -1; });
 
-/** --- TOUCH --- **/
-cvs.addEventListener('touchstart', e => {
-    if(!gameRunning) return;
-    let r=cvs.getBoundingClientRect(); tx=e.touches[0].clientX-r.left; ty=e.touches[0].clientY-r.top;
-    let idx=Math.floor((ty-bY)/sz)*c + Math.floor(tx/sz);
-    if(board[idx]) drag = idx;
-});
-cvs.addEventListener('touchmove', e => {
-    if(drag===-1) return; 
-    let r=cvs.getBoundingClientRect(); tx=e.touches[0].clientX-r.left; ty=e.touches[0].clientY-r.top; 
-    e.preventDefault();
-});
-cvs.addEventListener('touchend', () => {
-    if(drag!==-1){
-        let idx=Math.floor((ty-bY)/sz)*c + Math.floor(tx/sz);
-        if(idx>=0 && idx<board.length && idx!==drag){
-            let s=board[drag], t=board[idx];
-            if(t && s.id===t.id && s.dots===t.dots && s.dots < 7){ board[idx].dots++; board[drag]=null; }
-        }
-        drag=-1;
-    }
-});
-
-if (!localStorage.getItem('khang_dice_save')) { document.getElementById('contBtn').classList.add('btn-cont-off'); document.getElementById('contBtn').onclick = null; }
-
-render();
+setInterval(() => {
+    let best = localStorage.getItem('khang_best') || 0;
+    if(wave > best) localStorage.setItem('khang_best', wave);
+    document.getElementById('bestScoreText').innerText = "Kỷ lục: Wave " + localStorage.getItem('khang_best');
+}, 1000);
 </script>
 </body>
 </html>
