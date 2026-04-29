@@ -1,21 +1,21 @@
-# Tên quy trình tự động hóa
-name: Deploy Random Dice Ultra V12
+# Tên quy trình: Tự động triển khai Random Dice Ultra V12
+name: Deploy Random Dice 2026
 
 on:
-  # Chạy khi Khang đẩy code lên nhánh main
+  # Chạy khi push code lên nhánh chính
   push:
-    branches: ["main"]
+    branches: ["main", "master"] # Hỗ trợ cả 2 tên nhánh phổ biến
 
-  # Cho phép chạy thủ công từ tab Actions
+  # Cho phép chạy thủ công để fix lỗi không cập nhật
   workflow_dispatch:
 
-# Thiết lập quyền hạn cho GitHub Actions
+# Thiết lập quyền hạn (Permissions) - BẮT BUỘC cho năm 2026
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Tránh xung đột luồng xử lý
+# Tối ưu hóa: Nếu Khang push liên tục, nó sẽ hủy bản cũ để chạy bản mới nhất
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -27,22 +27,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      # Bước 1: Lấy code mới nhất từ Repo
-      - name: Checkout Code
+      # Bước 1: Lấy code (Sử dụng v4 mới nhất 2026)
+      - name: Checkout
         uses: actions/checkout@v4
 
-      # Bước 2: Thiết lập môi trường GitHub Pages
+      # Bước 2: Cấu hình môi trường Pages
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
-      # Bước 3: Đóng gói toàn bộ file (index.html, readme, ảnh...)
-      - name: Upload Artifact
+      # Bước 3: Đóng gói (Sử dụng v3 mới nhất)
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Triển khai từ thư mục gốc
-          path: '.'
+          path: '.' # Triển khai từ thư mục gốc
 
-      # Bước 4: Đẩy lên máy chủ web của GitHub
+      # Bước 4: Đẩy lên Server (Sử dụng v4 mới nhất)
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
