@@ -1,18 +1,23 @@
-name: Deploy Game Pro V9.1.3
+name: Deploy Random Dice Ultra to Pages
 
 on:
+  # Tự động chạy khi Khang push code lên nhánh main
   push:
-    branches: ["main"] # Nếu nhánh của Khang tên là master thì sửa main thành master
+    branches: ["main"]
+
+  # Cho phép Khang chạy thủ công từ tab Actions
   workflow_dispatch:
 
+# Thiết lập quyền hạn để ghi đè lên GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# ÉP BUỘC CHẠY TRÊN NODE.JS 24 ĐỂ KHÔNG BỊ LỖI CẬP NHẬT
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+# Đảm bảo chỉ có một luồng deploy chạy tại một thời điểm
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -21,7 +26,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Pages
@@ -30,8 +35,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # Đẩy toàn bộ file trong thư mục hiện tại
+          # Deploy toàn bộ thư mục gốc (nơi chứa index.html)
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        
