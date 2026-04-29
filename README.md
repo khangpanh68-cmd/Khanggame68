@@ -1,35 +1,55 @@
-# 🎲 Random Dice Ultra V12.0 - Cinematic Edition
+# 🎲 Random Dice Ultra - Gold Edition (V15.3)
 
-Chào mừng bạn đến với **Random Dice Ultra**, một trò chơi chiến thuật xúc xắc được phát triển bởi **Khang**. Trải nghiệm cảm giác phòng thủ tháp (Tower Defense) kịch tính với hệ thống xúc xắc đa dạng và đồ họa hiệu ứng rực rỡ.
+![Version](https://img.shields.io/badge/Version-15.3-gold?style=for-the-badge)
+![Graphics](https://img.shields.io/badge/Graphics-Ultra--HD-pink?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Stable-green?style=for-the-badge)
 
-## 🚀 Tính năng nổi bật (V12.0)
-* **Hệ thống Xúc xắc:** 30 loại xúc xắc với màu sắc và chỉ số riêng biệt.
-* **Tỷ lệ triệu hồi:** 10% cơ hội nhận ngay xúc xắc **VIP/ULTRA** cực mạnh khi triệu hồi.
-* **Hệ thống Skin VIP:** 10 loại Skin đẳng cấp (Neon, Diamond, Cyber, Godly Aura...) có thể mở khóa trong cửa hàng.
-* **Đồ họa Cinematic:** Hiệu ứng đổ bóng 3D, Gradient và Glow năng lượng cực đẹp.
-* **Quái vật thông minh:** Hiển thị máu trực tiếp trên quái vật và hệ thống Boss xuất hiện mỗi 5 Wave.
-* **GM TOOL VIP PRO:** Bảng điều khiển Admin tối cao (Yêu cầu Key xác thực).
-* **Anti-Freeze:** Công nghệ dừng Engine thông minh giúp máy không bị treo khi hết HP.
-
-## 🕹️ Cách chơi
-1.  **Triệu hồi:** Dùng điểm SP để triệu hồi xúc xắc ngẫu nhiên lên bàn cờ.
-2.  **Gộp xúc xắc:** Kéo hai xúc xắc cùng loại và cùng số sao (dots) đè lên nhau để nâng cấp bậc.
-3.  **Phòng thủ:** Xúc xắc sẽ tự động bắn hạ kẻ địch đi ngang qua. Đừng để máu (HP) về 0!
-4.  **Cửa hàng:** Tích lũy SP để mua các loại xúc xắc mạnh hơn hoặc thay đổi ngoại hình với Skin VIP.
-
-## 🛠️ Công nghệ sử dụng
-* **HTML5 & CSS3:** Giao diện người dùng mượt mà và linh hoạt.
-* **Canvas API:** Xử lý đồ họa game 60 FPS.
-* **JavaScript:** Logic game, AI kẻ địch và hệ thống lưu trữ kỷ lục (`localStorage`).
-
-## 🔑 Quyền Admin
-Hệ thống tích hợp bảng điều khiển **CONSOLE** dành riêng cho nhà phát triển để kiểm tra lỗi và cân bằng game.
-* *Lưu ý: Cần có Key bí mật để truy cập.*
-
-## 👨‍💻 Tác giả
-* **Developer:** Khang
-* **Version:** 12.0 (Final Anti-Freeze Edition)
-* **Dành tặng cho:** Phương Anh ❤️
+**Random Dice Ultra** là một siêu phẩm Tower Defense (thủ thành) được phát triển trên nền tảng Web-Mobile. Trò chơi kết hợp giữa may mắn, chiến thuật và hệ thống đồ họa HD đỉnh cao, mang lại trải nghiệm mượt mà ngay cả trên các thiết bị di động.
 
 ---
-© 2026 Random Dice Ultra Project. Built with passion.
+
+## 🌟 Tính năng chính
+
+### 🛡️ Hệ thống Xúc xắc & Skin
+* **80 Loại Xúc xắc:** 30 loại cơ bản và 50 loại **Ultra VIP** với sát thương đột phá.
+* **80 Skin HD:** Hệ thống Skin tương ứng cho từng loại xúc xắc với hiệu ứng **Shadow Glow** (phát sáng) và **Multi-Gradient** cao cấp.
+* **Mô tả chi tiết:** Cửa hàng hiển thị rõ chỉ số Dame và giá SP cho từng mục.
+
+### 🎮 Cơ chế Gameplay mượt mà
+* **Merge Pro:** Kéo thả để hợp nhất xúc xắc cùng loại và sao. Hỗ trợ lên đến 7 sao.
+* **Trash System:** Tính năng thùng rác 🗑️ giúp dọn bàn và hoàn lại một phần tài nguyên.
+* **Live HP Numbers:** Hiển thị lượng máu của quái vật bằng số nhảy trực tiếp trên màn hình theo thời gian thực.
+* **HD Graphics:** Giao diện **Glassmorphism** kính mờ hiện đại, hiệu ứng HD sắc nét.
+
+### ⚡ Quyền năng quản lý (GM Tool)
+* **Floating Button:** Nút nổi ⚡ truy cập Console ngay trong trận đấu.
+* **Premium Console:** * Cộng 1,000,000 SP chỉ với 1 chạm.
+  * Chế độ God Mode (Bất tử máu).
+  * Diệt sạch quái trên bàn cờ.
+  * ** Summon:** Chọn đích danh bất kỳ loại xúc xắc nào và triệu hồi với mức **Max 7 Sao**.
+
+---
+
+## 🛠️ Công nghệ sử dụng
+* **Frontend:** HTML5, CSS3 (Advanced Flexbox/Grid).
+* **Logic:** Pure JavaScript (ES6+).
+* **Rendering:** Canvas API (Tối ưu hóa khung hình trên Mobile).
+* **Storage:** LocalStorage (Lưu kỷ lục Wave cao nhất).
+
+---
+
+## 🚀 Hướng dẫn cài đặt & Chơi
+1. Tải về file `Random_Dice_Ultra_V15.3.html`.
+2. Mở file bằng bất kỳ trình duyệt nào (Chrome, Safari, hoặc trình duyệt trong Acode/Pydroid 3).
+3. Sử dụng SP để triệu hồi xúc xắc và bắt đầu phòng thủ.
+4. **Mật mã key:** `*******`
+
+---
+
+## 📸 Giao diện dự án
+- **Menu chính:** Thiết kế theo phong cách Ultra HD Gold.
+- **Shop:** Phân chia Tab Dice và Skin HD chuyên nghiệp.
+- **Trận đấu:** Hiệu ứng đạn và quái HD sống động.
+
+---
+**Phát triển bởi:** Khangpanh68 
