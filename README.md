@@ -1,55 +1,54 @@
-# 🎲 Random Dice Ultra - Gold Edition (V15.3)
+# 🎲 Random Dice Ultra - Skin Master Edition (V18.6)
 
-![Version](https://img.shields.io/badge/Version-15.3-gold?style=for-the-badge)
-![Graphics](https://img.shields.io/badge/Graphics-Ultra--HD-pink?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Stable-green?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-18.6-premium?style=for-the-badge)
+![Items](https://img.shields.io/badge/Total--Items-500-orange?style=for-the-badge)
+![Graphics](https://img.shields.io/badge/Graphics-Ultra--HD--Master-pink?style=for-the-badge)
+![Admin](https://img.shields.io/badge/Admin-Khangpanh68-blue?style=for-the-badge)
 
-**Random Dice Ultra** là một siêu phẩm Tower Defense (thủ thành) được phát triển trên nền tảng Web-Mobile. Trò chơi kết hợp giữa may mắn, chiến thuật và hệ thống đồ họa HD đỉnh cao, mang lại trải nghiệm mượt mà ngay cả trên các thiết bị di động.
-
----
-
-## 🌟 Tính năng chính
-
-### 🛡️ Hệ thống Xúc xắc & Skin
-* **80 Loại Xúc xắc:** 30 loại cơ bản và 50 loại **Ultra VIP** với sát thương đột phá.
-* **80 Skin HD:** Hệ thống Skin tương ứng cho từng loại xúc xắc với hiệu ứng **Shadow Glow** (phát sáng) và **Multi-Gradient** cao cấp.
-* **Mô tả chi tiết:** Cửa hàng hiển thị rõ chỉ số Dame và giá SP cho từng mục.
-
-### 🎮 Cơ chế Gameplay mượt mà
-* **Merge Pro:** Kéo thả để hợp nhất xúc xắc cùng loại và sao. Hỗ trợ lên đến 7 sao.
-* **Trash System:** Tính năng thùng rác 🗑️ giúp dọn bàn và hoàn lại một phần tài nguyên.
-* **Live HP Numbers:** Hiển thị lượng máu của quái vật bằng số nhảy trực tiếp trên màn hình theo thời gian thực.
-* **HD Graphics:** Giao diện **Glassmorphism** kính mờ hiện đại, hiệu ứng HD sắc nét.
-
-### ⚡ Quyền năng quản lý (GM Tool)
-* **Floating Button:** Nút nổi ⚡ truy cập Console ngay trong trận đấu.
-* **Premium Console:** * Cộng 1,000,000 SP chỉ với 1 chạm.
-  * Chế độ God Mode (Bất tử máu).
-  * Diệt sạch quái trên bàn cờ.
-  * ** Summon:** Chọn đích danh bất kỳ loại xúc xắc nào và triệu hồi với mức **Max 7 Sao**.
+**Random Dice Ultra V18.6** là phiên bản đột phá nhất trong series, tập trung vào trải nghiệm đồ họa HD+ và hệ thống vật phẩm khổng lồ. Game kết hợp hoàn hảo giữa lối chơi thủ thành chiến thuật và cơ chế may mắn của xúc xắc.
 
 ---
 
-## 🛠️ Công nghệ sử dụng
-* **Frontend:** HTML5, CSS3 (Advanced Flexbox/Grid).
-* **Logic:** Pure JavaScript (ES6+).
-* **Rendering:** Canvas API (Tối ưu hóa khung hình trên Mobile).
-* **Storage:** LocalStorage (Lưu kỷ lục Wave cao nhất).
+## 🚀 Tính năng mới trong bản V18.6
+
+### ⚔️ Chế độ Săn Boss (Boss Raid Mode)
+* **🔥 Săn Boss 🔥:** Chế độ chơi mới có thể chọn ngay từ Menu chính. Boss có lượng HP cực lớn, kích thước khổng lồ và hiệu ứng hào quang phát sáng.
+* **Cơ chế Boss:** Cứ mỗi 10 Wave trong chế độ thường, quái vật trùm sẽ xuất hiện. Hạ gục Boss để nhận được lượng SP (Kim cương) khổng lồ.
+
+### 🎨 Hệ thống 500 Vật phẩm (250 Dices & 250 Skins)
+* **250 Loại Xúc xắc:** Phân cấp từ Thường, Ultra đến **Diamond VIP**. Các xúc xắc cấp cao có viền Neon và thay đổi màu sắc liên tục.
+* **250 Skin HD+:** Hệ thống Skin Master giúp xúc xắc sở hữu hiệu ứng **Neon Glow**, viền trắng HD và đường đạn (trails) đặc biệt.
+* **Shop Tab thông minh:** Giao diện Shop được chia làm 2 tab chuyên biệt, tối ưu hóa tốc độ cuộn danh sách cho 500 vật phẩm mà không gây lag máy.
+
+### ⚡ Quyền năng Quản Lý (Premium GM Console)
+* **Nút ⚡ Nổi:** Truy cập trực tiếp vào bảng điều khiển ngay trong khi đang chiến đấu.
+* **Quyền hạn cấp cao:**
+    * **+1M SP:** Buff tiền không giới hạn để mua sắm 500 vật phẩm.
+    * **God Mode:** Bất tử HP, không bao giờ thua cuộc.
+    * **Quản Lý Summon:** Triệu hồi đích danh bất kỳ loại xúc xắc nào (từ 1 đến 250) với mức **Max 7 Sao**.
+    * **Diệt quái:** Xóa sổ quái vật và Boss trên toàn bản đồ.
 
 ---
 
-## 🚀 Hướng dẫn cài đặt & Chơi
-1. Tải về file `Random_Dice_Ultra_V15.3.html`.
-2. Mở file bằng bất kỳ trình duyệt nào (Chrome, Safari, hoặc trình duyệt trong Acode/Pydroid 3).
-3. Sử dụng SP để triệu hồi xúc xắc và bắt đầu phòng thủ.
-4. **Mật mã key:** `*******`
+## 🎮 Cơ chế Gameplay
+1. **Triệu hồi:** Sử dụng 50 SP để triệu hồi ngẫu nhiên một viên xúc xắc.
+2. **Hợp nhất (Merge):** Kéo thả 2 xúc xắc cùng loại, cùng sao để thăng cấp (Max 7 sao).
+3. **Xóa bỏ (Trash):** Kéo xúc xắc vào 🗑️ để dọn bàn cờ và nhận lại 30 SP.
+4. **Vibration:** Hỗ trợ rung phản hồi khi gộp xúc xắc thành công (trên mobile).
 
 ---
 
-## 📸 Giao diện dự án
-- **Menu chính:** Thiết kế theo phong cách Ultra HD Gold.
-- **Shop:** Phân chia Tab Dice và Skin HD chuyên nghiệp.
-- **Trận đấu:** Hiệu ứng đạn và quái HD sống động.
+## 🛠️ Thông tin kỹ thuật
+* **Front-end:** HTML5, CSS3 (Glassmorphism & Advanced Gradients).
+* **Back-end Logic:** Pure JavaScript (ES6+).
+* **Rendering:** High-performance Canvas API (60 FPS).
+* **Deploy:** Tối ưu hóa cho GitHub Pages chuẩn 2026.
 
 ---
-**Phát triển bởi:** Khangpanh68 
+
+## 🔑 Quyền truy cập Quản Lý 
+* **Mật mã (Key):** `********`
+* **Cách mở:** Nhấn vào biểu tượng ⚡ ở góc trên bên phải màn hình.
+
+---
+**© 2026 Developed by Khangpanh68 
