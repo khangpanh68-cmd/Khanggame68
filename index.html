@@ -2,218 +2,269 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Random Dice Ultra V15.3 - Gold Edition</title>
+    <title>Random Dice V18.6 Edition</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         :root { 
             --p: #0f172a; --a: #f1c40f; --d: #ef4444; --s: #10b981; 
             --gm: #00ecff; --ultra: #f472b6; --premium: #ff00ea;
-            --glass: rgba(255, 255, 255, 0.05);
         }
-        body { margin: 0; background: #020617; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; touch-action: none; }
+        body { margin: 0; background: #020617; color: white; font-family: sans-serif; overflow: hidden; touch-action: none; }
         
-        /* GIAO DIỆN LỚP PHỦ ULTRA HD */
-        #mainMenu, #shopUI, #gmVIPUI, #gameOverUI, #gmAuthUI, #guideUI { 
-            position: fixed; inset: 0; z-index: 100000; display: flex; 
+        #mainMenu, #shopUI, #gmVIPUI, #gmAuthUI, #guideUI, #gameOverUI { 
+            position: fixed; inset: 0; z-index: 10000; display: flex; 
             flex-direction: column; align-items: center; justify-content: center; 
             background: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%); 
         }
         
         .menu-card { 
-            background: var(--glass); backdrop-filter: blur(25px); 
-            padding: 40px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1); 
-            text-align: center; width: 85%; max-width: 380px;
-            box-shadow: 0 0 80px rgba(0,0,0,0.6);
-            animation: fadeIn 0.5s ease;
+            background: rgba(255,255,255,0.05); backdrop-filter: blur(25px); 
+            padding: 25px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); 
+            text-align: center; width: 92%; max-width: 400px;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
-        .menu-title { font-size: 45px; font-weight: 900; color: var(--a); text-shadow: 0 0 25px var(--d); margin: 0; }
-        .menu-sub { color: var(--gm); font-weight: bold; letter-spacing: 4px; margin-bottom: 30px; font-size: 14px; }
-
-        /* SHOP FULL HD CẤU TRÚC MỚI */
-        .panel-full { background: #0f172a; border-radius: 30px; border: 2px solid var(--gm); width: 95%; height: 90vh; display: flex; flex-direction: column; padding: 15px; }
-        .shop-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
-        .tab-btn { flex: 1; padding: 12px; border-radius: 15px; border: 1px solid var(--gm); background: transparent; color: white; font-weight: bold; font-size: 14px; }
-        .tab-on { background: var(--gm); color: black; box-shadow: 0 0 15px var(--gm); }
+        .panel-full { background: #0f172a; border-radius: 25px; border: 2px solid var(--gm); width: 95%; height: 85vh; display: flex; flex-direction: column; padding: 15px; }
         
-        .shop-list { flex: 1; overflow-y: auto; padding-right: 5px; }
+        .shop-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+        .tab-btn { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--gm); background: transparent; color: white; font-weight: bold; }
+        .tab-on { background: var(--gm); color: #000; }
+
+        .scroll-list { flex: 1; overflow-y: auto; padding-right: 5px; margin-bottom: 10px; }
         .item-row { 
-            background: rgba(255,255,255,0.03); margin-bottom: 10px; padding: 15px; 
-            border-radius: 20px; display: flex; align-items: center; justify-content: space-between; 
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03); margin-bottom: 8px; padding: 12px; 
+            border-radius: 12px; display: flex; align-items: center; justify-content: space-between; 
+            border-left: 5px solid #444;
         }
-        .item-info b { display: block; font-size: 15px; }
-        .item-info span { font-size: 11px; color: #94a3b8; }
 
-        /* NÚT BẤM */
-        .btn-hd { width: 100%; padding: 18px; margin: 10px 0; border: none; border-radius: 20px; font-size: 18px; font-weight: 900; cursor: pointer; color: white; transition: 0.3s; }
-        .btn-play { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 8px 0 #047857; }
-        .btn-gm-live { position: fixed; top: 15px; right: 10px; width: 45px; height: 45px; background: var(--premium); border-radius: 12px; z-index: 99999; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 15px var(--premium); }
+        .btn-hd { width: 100%; padding: 15px; margin: 5px 0; border: none; border-radius: 15px; font-size: 15px; font-weight: 900; cursor: pointer; color: white; transition: 0.3s; }
+        .btn-play { background: #10b981; }
+        .btn-boss { background: linear-gradient(135deg, #ef4444, #991b1b); border: 1px solid var(--a); }
+        .btn-gm-live { position: fixed; top: 12px; right: 12px; width: 42px; height: 42px; background: var(--premium); border-radius: 10px; z-index: 10001; display: flex; align-items: center; justify-content: center; font-weight: 900; }
 
-        canvas { background: transparent; border-radius: 25px; margin: 10px auto; display: block; }
-        #trashBin { position: fixed; bottom: 100px; right: 25px; width: 65px; height: 65px; background: rgba(239,68,68,0.1); border: 2px dashed var(--d); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 1000; }
+        canvas { background: rgba(0,0,0,0.4); border-radius: 20px; display: block; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); }
+        .header { position: absolute; top: 65px; width: 100%; display: flex; justify-content: space-around; z-index: 5; font-size: 14px; }
+        #trashBin { position: fixed; bottom: 110px; right: 20px; width: 60px; height: 60px; background: rgba(239,68,68,0.2); border: 2px dashed var(--d); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 100; }
+        
+        select, input { padding: 12px; border-radius: 10px; border: none; width: 100%; background: #1e293b; color: white; margin: 10px 0; }
     </style>
 </head>
 <body>
 
-    <div id="btn-gm-live" class="btn-gm-live" onclick="openAuth()">⚡</div>
+    <div class="btn-gm-live" onclick="openAuth()">⚡</div>
 
     <div id="mainMenu">
         <div class="menu-card">
-            <h1 class="menu-title">RANDOM DICE</h1>
-            <div class="menu-sub">ULTRA HD V15.3</div>
-            <button class="btn-hd btn-play" onclick="gameStart(true)">BẮT ĐẦU CHIẾN</button>
-            <button class="btn-hd" style="background:var(--v); box-shadow:0 8px 0 #b45309;" onclick="openShop()">CỬA HÀNG VIP</button>
-            <button class="btn-hd" style="background:rgba(255,255,255,0.05); border:1px solid var(--gm); color:var(--gm);" onclick="openUI('guideUI')">HƯỚNG DẪN</button>
+            <h1 style="color:var(--a); margin:0; font-size:30px;">RANDOM DICE</h1>
+            <p style="color:var(--gm); letter-spacing: 2px; font-size: 10px;">V18.6 SKIN & BOSS EDITION</p>
+            <button class="btn-hd btn-play" onclick="gameStart(false)">CHẾ ĐỘ THƯỜNG</button>
+            <button class="btn-hd btn-boss" onclick="gameStart(true)">🔥 SĂN BOSS 🔥</button>
+            <button class="btn-hd" style="background:#f59e0b" onclick="openShop()">CỬA HÀNG (500 MÓN)</button>
+            <button class="btn-hd" style="background:rgba(255,255,255,0.1)" onclick="openUI('guideUI')">HƯỚNG DẪN</button>
         </div>
     </div>
 
     <div id="shopUI" style="display:none">
         <div class="panel-full">
             <div class="shop-tabs">
-                <button id="t1" class="tab-btn tab-on" onclick="switchShop('dice')">DICES (80)</button>
-                <button id="t2" class="tab-btn" onclick="switchShop('skin')">SKINS (80)</button>
+                <button id="tD" class="tab-btn tab-on" onclick="swTab('dice')">DICES (250)</button>
+                <button id="tS" class="tab-btn" onclick="swTab('skin')">SKINS (250)</button>
             </div>
-            <div id="shopDiceList" class="shop-list"></div>
-            <div id="shopSkinList" class="shop-list" style="display:none"></div>
-            <button class="btn-hd" style="background:var(--d); padding:12px; margin-top:10px;" onclick="closeUI('shopUI')">ĐÓNG SHOP</button>
+            <div id="lDice" class="scroll-list"></div>
+            <div id="lSkin" class="scroll-list" style="display:none"></div>
+            <button class="btn-hd" style="background:var(--d)" onclick="closeUI('shopUI')">QUAY LẠI</button>
         </div>
     </div>
 
     <div id="gmVIPUI" style="display:none">
         <div class="panel-full" style="border-color: var(--premium);">
-            <h2 style="color:var(--premium); text-align:center;">PREMIUM CONSOLE</h2>
-            <div class="shop-list">
-                <button class="btn-hd" style="background:var(--s)" onclick="sp+=1000000;updateUI()">+1.000.000 SP</button>
-                <button class="btn-hd" style="background:white; color:black" onclick="hp=999999;updateUI()">GOD MODE (HP MAX)</button>
-                <button class="btn-hd" style="background:var(--d)" onclick="enemies=[];bullets=[];">DIỆT GỌN QUÁI</button>
-                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:20px; margin-top:10px;">
-                    <b style="color:var(--a)">TRIỆU HỒI ADMIN (7⭐)</b>
-                    <select id="gmDiceSelect" style="width:100%; padding:15px; margin-top:10px; border-radius:12px; background:#1e293b; color:white; border:none;"></select>
-                    <button class="btn-hd" style="background:var(--premium); margin-top:10px;" onclick="gmSpawnMax()">TRIỆU HỒI NGAY</button>
-                </div>
+            <h2 style="color:var(--premium); text-align:center;">GM CONSOLE</h2>
+            <div class="scroll-list">
+                <button class="btn-hd" style="background:var(--s)" onclick="sp+=1000000;upUI()">+1M SP</button>
+                <button class="btn-hd" style="background:white; color:black" onclick="hp=999999;upUI()">BẤT TỬ HP</button>
+                <select id="gmSel"></select>
+                <button class="btn-hd" style="background:var(--premium)" onclick="gmS()">TRIỆU HỒI 7★</button>
             </div>
-            <button class="btn-hd" style="background:white; color:black; margin-top:10px;" onclick="closeUI('gmVIPUI')">QUAY LẠI GAME</button>
+            <button class="btn-hd" style="background:#444" onclick="closeUI('gmVIPUI')">THOÁT</button>
         </div>
     </div>
 
-    <div id="guideUI" style="display:none"><div class="menu-card"><h2>HƯỚNG DẪN</h2><p style="text-align:left;">- Dùng SP triệu hồi xúc xắc.<br>- Gộp 2 con cùng loại + sao để nâng cấp.<br>- Hạ địch nhận 80 SP.<br>- Kéo vào 🗑️ để xóa xúc xắc.</p><button class="btn-hd btn-play" onclick="closeUI('guideUI')">ĐÃ HIỂU</button></div></div>
-    <div id="gmAuthUI" style="display:none"><div class="menu-card"><h3>NHẬP KEY</h3><input type="password" id="gmKeyInput" style="padding:15px; width:80%; border-radius:15px; border:none; text-align:center;"><button class="btn-hd btn-play" style="margin-top:15px;" onclick="checkGMKey()">XÁC THỰC</button><button class="btn-hd" style="background:var(--d); margin-top:10px;" onclick="closeUI('gmAuthUI')">HỦY</button></div></div>
+    <div id="gameOverUI" style="display:none">
+        <div class="menu-card">
+            <h1 id="overTitle" style="color:var(--d)">THẤT BẠI!</h1>
+            <p id="resTxt">Wave 1</p>
+            <button class="btn-hd btn-play" onclick="re()">CHƠI LẠI</button>
+            <button class="btn-hd" style="background:#444" onclick="location.reload()">VỀ MENU</button>
+        </div>
+    </div>
+
+    <div id="gmAuthUI" style="display:none"><div class="menu-card"><h3>KEY ADMIN</h3><input type="password" id="gKey"><button class="btn-hd btn-play" onclick="cGM()">VÀO</button></div></div>
+    <div id="guideUI" style="display:none"><div class="menu-card"><h3>HƯỚNG DẪN</h3><p>- Mua Skin trong Shop để tăng hiệu ứng.<br>- Chế độ Săn Boss sẽ cực khó.<br>- Dùng GM Tool để trải nghiệm xúc xắc mạnh nhất.</p><button class="btn-hd btn-play" onclick="closeUI('guideUI')">OK</button></div></div>
 
     <div id="trashBin">🗑️</div>
 
     <div class="header">
-        <div style="color:var(--d); font-weight:900;">❤️ <span id="hpVal">1000</span></div>
-        <div style="color:var(--s); font-weight:900;">💎 <span id="spVal">1000</span></div>
-        <div style="color:var(--gm); font-weight:900;">🌊 <span id="wv">1</span></div>
+        <div style="color:var(--d)">❤️ <span id="hpV">1000</span></div>
+        <div style="color:var(--s)">💎 <span id="spV">1000</span></div>
+        <div style="color:var(--gm)">🌊 <span id="wV">1</span></div>
     </div>
 
     <canvas id="gameCanvas"></canvas>
 
-    <div style="display:flex; gap:10px; width:95%; margin:5px auto;">
-        <button class="btn-hd" style="background: linear-gradient(135deg, #f59e0b, #d97706); flex:2;" onclick="spawn()">TRIỆU HỒI</button>
-        <button class="btn-hd" style="background: #1e293b; border: 1px solid var(--gm); flex:1;" onclick="openShop()">SHOP</button>
+    <div style="display:flex; gap:10px; width:95%; margin:10px auto;">
+        <button class="btn-hd" style="background: #f59e0b; flex:2;" onclick="spn()">TRIỆU HỒI (50 SP)</button>
+        <button class="btn-hd" style="background: #1e293b; flex:1;" onclick="openShop()">SHOP</button>
     </div>
 
 <script>
-/** --- CƠ SỞ DỮ LIỆU 80 MỤC ĐỒNG BỘ --- **/
-const colors = ['#FF4D4D','#33FF57','#3357FF','#FF33FF','#33FFF3','#FF3399','#9933FF','#33FF99','#FF9933','#33FFCC','#9933CC','#FF3333','#66FF66','#6666FF','#FFFF33','#33FFFF','#FF00FF','#E0E0E0','#B0B0B0','#FF5050','#CCCC00','#00CC00','#CC00CC','#00CCCC','#0000CC','#FF6600','#3CB371','#EE82EE','#FFD700','#00CED1','#FF1493','#00FF00','#0000FF','#FFFF00','#FF00FF','#00FFFF','#800000','#808000','#008000','#800080','#008080','#000080','#FFA500','#FFD700','#ADFF2F','#FF4500','#7FFF00','#D2691E','#FF69B4','#BA55D3','#7B68EE','#40E0D0','#EE82EE','#F0E68C','#DDA0DD','#B0E0E6','#98FB98','#AFEEEE','#DB7093','#FFEFD5','#FFDAB9','#CD853F','#F4A460','#8B4513','#A0522D','#BC8F8F','#E9967A','#F08080','#FA8072','#FFA07A','#FF7F50','#FF6347','#FF4500','#FF0000','#B22222','#8B0000','#FF8C00','#FFA500','#FFD700','#FFFF00'];
-const names = ['Lửa','Băng','Gió','Sét','Độc','Sắt','Quang','Mìn','Nước','Đá','Súng','Bom','Tử Thần','Khiên','Bão','Hố Đen','Rồng','Thần','Joker','Solar','Plasma','Titan','Neon','Galaxy','Shadow','Phoenix','Chaos','Eternal','God','Ancient','Mega','Prime','Nova','Void','Aura','Soul','Zero','Zenith','Omega','Alpha','Delta','Sigma','Lunar','Solar+','Nebula','Comet','Orbit','Pulsar','Quasar','Rift','Core','Shell','Spike','Edge','Drift','Flow','Pulse','Spark','Blaze','Frost','Storm','Earth','Tide','Light','Dark','Magic','Tech','Bio','Mecha','Cyber','Godly','Inferno','Blizzard','Volt','Hazard','Titanium','Mythic','Relic','Legend','Ultra'];
-const allDices = names.map((n, i) => ({ id: i, name: n, color: colors[i], dmg: 100 + i*55, price: i<30?600:3500, isU: i>=30 }));
-const allSkins = names.map((n, i) => ({ id: i, name: "Skin " + n + " HD", price: 400000, owned: false }));
+/** --- DATA 250 DICES & 250 SKINS --- **/
+const dNames = ['Lửa','Băng','Gió','Sét','Độc','Sắt','Quang','Mìn','Nước','Đá','Gỗ','Cát','Bom','Kiếm','Thánh','Quỷ','Joker','Solar','Lunar','Titan','Neon','Galaxy','Shadow','Phoenix','Chaos','God','Mega','Nova','Void','Soul','Zero','Alpha','Sigma','Core','Pulse','Spark','Blaze','Frost','Storm','Earth','Tide','Light','Dark','Magic','Tech','Cyber','Inferno','Mythic','Ultra','Diamond'];
+const dD = []; const sD = [];
 
-let sp = 1000, hp = 1000, wave = 1, frame = 0, gameRunning = false, drag = -1, mx = 0, my = 0, isGM = false;
-const cvs = document.getElementById('gameCanvas'), ctx = cvs.getContext('2d');
-cvs.width = 350; cvs.height = 380;
-const sz = 70, col = 5, boardY = 160;
-let board = Array(15).fill(null), enemies = [], bullets = [];
-
-/** --- UI & SHOP LOGIC FIXED --- **/
-function openUI(id) { document.getElementById(id).style.display = 'flex'; }
-function closeUI(id) { document.getElementById(id).style.display = 'none'; }
-
-function switchShop(t) {
-    document.getElementById('shopDiceList').style.display = t=='dice'?'block':'none';
-    document.getElementById('shopSkinList').style.display = t=='skin'?'block':'none';
-    document.getElementById('t1').className = t=='dice'?'tab-btn tab-on':'tab-btn';
-    document.getElementById('t2').className = t=='skin'?'tab-btn tab-on':'tab-btn';
+for(let i=0; i<250; i++){
+    let tier = i > 200 ? "Diamond VIP" : (i > 120 ? "Ultra" : "Thường");
+    let bCol = i > 200 ? "#ff00ea" : (i > 120 ? "#f472b6" : "#444");
+    let color = `hsl(${(i*23)%360}, 75%, 60%)`;
+    dD.push({ id:i, name:dNames[i%dNames.length]+(Math.floor(i/dNames.length)+1), color:color, dmg:100+(i*40), price:500+(i*200), border:bCol });
+    sD.push({ id:i, name:"Skin "+dD[i].name+" HD+", price:5000+(i*1500), owned:false });
 }
 
-function refreshShop() {
-    document.getElementById('shopDiceList').innerHTML = allDices.map(d => `<div class="item-row"><div><b>${d.name}</b><br><span>Dame: ${d.dmg}</span></div><button style="background:var(--s); padding:10px; border-radius:10px; border:none; color:white;" onclick="buyDice(${d.id})">${d.price}</button></div>`).join('');
-    document.getElementById('shopSkinList').innerHTML = allSkins.map(s => `<div class="item-row"><div><b>${s.name}</b><br><span>Hiệu ứng HD</span></div><button style="background:var(--premium); padding:10px; border-radius:10px; border:none; color:white;" onclick="buySkin(${s.id})">${s.owned?'ĐÃ CÓ':'400k'}</button></div>`).join('');
+/** --- VARS --- **/
+let sp=1000, hp=1000, wave=1, frame=0, gR=false, isG=false, drag=-1, mx=0, my=0, eInW=0, mE=10, isW=false, bossMode=false;
+const cvs=document.getElementById('gameCanvas'), ctx=cvs.getContext('2d');
+cvs.width=350; cvs.height=380;
+const sz=70, col=5, bY=130;
+let board=Array(15).fill(null), enemies=[], bullets=[];
+
+/** --- SHOP LOGIC --- **/
+function openUI(id){ document.getElementById(id).style.display='flex'; }
+function closeUI(id){ document.getElementById(id).style.display='none'; }
+function swTab(t){
+    document.getElementById('lDice').style.display = t==='dice'?'block':'none';
+    document.getElementById('lSkin').style.display = t==='skin'?'block':'none';
+    document.getElementById('tD').className = t==='dice'?'tab-btn tab-on':'tab-btn';
+    document.getElementById('tS').className = t==='skin'?'tab-btn tab-on':'tab-btn';
 }
+function openShop(){
+    openUI('shopUI');
+    document.getElementById('lDice').innerHTML = dD.map(d => `
+        <div class="item-row" style="border-left-color:${d.border}">
+            <div><b style="color:${d.color}">${d.name}</b><br><small>Dmg: ${d.dmg}</small></div>
+            <button onclick="buyD(${d.id})" style="background:var(--s); color:white; border:none; padding:8px 12px; border-radius:10px;">${d.price}</button>
+        </div>`).join('');
+    document.getElementById('lSkin').innerHTML = sD.map(s => `
+        <div class="item-row">
+            <div><b>${s.name}</b><br><small>Hào quang HD+</small></div>
+            <button onclick="buyS(${s.id})" style="background:var(--premium); color:white; border:none; padding:8px 12px; border-radius:10px;">${s.owned?'ĐÃ CÓ':s.price}</button>
+        </div>`).join('');
+}
+function buyD(id){ let e=board.indexOf(null); if(sp>=dD[id].price && e!=-1){ sp-=dD[id].price; board[e]={...dD[id], dots:1}; upUI(); } }
+function buyS(id){ if(sp>=sD[id].price && !sD[id].owned){ sp-=sD[id].price; sD[id].owned=true; openShop(); upUI(); } }
 
-function openShop() { openUI('shopUI'); refreshShop(); }
-function buyDice(id) { let empty = board.indexOf(null); if(sp >= allDices[id].price && empty != -1) { sp -= allDices[id].price; board[empty] = {...allDices[id], dots:1}; updateUI(); } }
-function buySkin(id) { if(sp >= 400000 && !allSkins[id].owned) { sp -= 400000; allSkins[id].owned = true; refreshShop(); updateUI(); } }
+function cGM(){ if(document.getElementById('gKey').value==="Khangpanh68"){ isG=true; closeUI('gmAuthUI'); openGM(); } }
+function openAuth(){ isG?openGM():openUI('gmAuthUI'); }
+function openGM(){ openUI('gmVIPUI'); document.getElementById('gmSel').innerHTML=dD.map(d=>`<option value="${d.id}">${d.name}</option>`).join(''); }
+function gmS(){ let id=document.getElementById('gmSel').value; let e=board.indexOf(null); if(e!=-1){ board[e]={...dD[id], dots:7}; upUI(); } }
+function upUI(){ document.getElementById('spV').innerText=Math.floor(sp); document.getElementById('hpV').innerText=Math.floor(hp); document.getElementById('wV').innerText=wave; }
 
-/** --- GM TOOL FIXED --- **/
-function openAuth() { if(isGM) { document.getElementById('gmDiceSelect').innerHTML = allDices.map(d => `<option value="${d.id}">${d.name}</option>`).join(''); openUI('gmVIPUI'); } else openUI('gmAuthUI'); }
-function checkGMKey() { if(document.getElementById('gmKeyInput').value === "Khangpanh68") { isGM = true; closeUI('gmAuthUI'); openAuth(); } }
-function gmSpawnMax() { let id = document.getElementById('gmDiceSelect').value; let empty = board.indexOf(null); if(empty !== -1) { board[empty] = {...allDices[id], dots: 7}; updateUI(); } }
-
-function updateUI() { document.getElementById('spVal').innerText=sp; document.getElementById('hpVal').innerText=hp; document.getElementById('wv').innerText=wave; }
-
-/** --- ENGINE RENDER HD --- **/
-function render() {
-    if(!gameRunning) return; requestAnimationFrame(render);
+/** --- ENGINE --- **/
+function render(){
+    if(!gR) return; requestAnimationFrame(render);
     frame++; ctx.clearRect(0,0,cvs.width,cvs.height);
-    for(let i=0; i<15; i++) {
-        let x=(i%col)*sz, y=boardY+Math.floor(i/col)*sz;
-        ctx.strokeStyle = "rgba(255,255,255,0.1)"; ctx.strokeRect(x+2,y+2,sz-4,sz-4);
-        if(board[i] && i !== drag) drawDice(x,y,board[i]);
+    for(let i=0; i<15; i++){
+        let x=(i%col)*sz, y=bY+Math.floor(i/col)*sz;
+        ctx.strokeStyle="rgba(255,255,255,0.05)"; ctx.strokeRect(x+5,y+5,sz-10,sz-10);
+        if(board[i] && i!==drag) drawD(x,y,board[i]);
     }
-    if(frame % 100 === 0) enemies.push({ x:-30, y:80, hp: 500*wave, s: 35, speed: 1.5 });
-    enemies = enemies.filter(e => {
-        e.x += e.speed;
-        if(e.x > cvs.width) { hp -= 50; updateUI(); return false; }
-        if(e.hp <= 0) { sp += 80; updateUI(); return false; }
-        ctx.fillStyle = "#ef4444"; ctx.beginPath(); ctx.roundRect(e.x, e.y, e.s, e.s, 10); ctx.fill();
-        ctx.fillStyle = "white"; ctx.textAlign = "center"; ctx.font = "bold 11px Arial"; ctx.fillText(Math.floor(e.hp), e.x + e.s/2, e.y + e.s/2 + 5);
+    
+    if(!isW){
+        let isB = bossMode || (wave % 10 === 0);
+        if(isB){
+            if(eInW < 1){
+                let bHp = (1000 + wave*2000)*5;
+                enemies.push({x:-60, y:60, hp:bHp, mH:bHp, s:0.5, boss:true, sz:60, color:`hsl(${(wave*45)%360},100%,50%)`});
+                eInW++;
+            }
+        } else {
+            if(frame % 100 === 0 && eInW < mE){
+                enemies.push({x:-30, y:70, hp:400+wave*350, mH:400+wave*350, s:1.2+(wave*0.05), boss:false, sz:30, color:"#ef4444"});
+                eInW++;
+            }
+        }
+        if(eInW >= (isB?1:mE) && enemies.length===0) nW();
+    }
+
+    enemies=enemies.filter(e=>{
+        e.x+=e.s;
+        if(e.x>cvs.width){ hp-=(e.boss?200:50); upUI(); return false; }
+        if(e.hp<=0){ sp+=e.boss?(800+wave*100):(30+wave); upUI(); return false; }
+        ctx.fillStyle=e.color;
+        if(e.boss) { ctx.shadowBlur=15; ctx.shadowColor=e.color; }
+        ctx.beginPath(); ctx.roundRect(e.x,e.y,e.sz,e.sz,10); ctx.fill(); ctx.shadowBlur=0;
+        ctx.fillStyle="white"; ctx.textAlign="center"; ctx.font="bold 12px Arial";
+        ctx.fillText(Math.floor(e.hp), e.x+e.sz/2, e.y-8);
         return true;
     });
-    board.forEach((d, i) => { if(d && enemies.length > 0 && frame % 30 === 0) bullets.push({x:(i%col)*sz+sz/2, y:boardY+Math.floor(i/col)*sz+sz/2, target:enemies[0], dmg:d.dmg*d.dots, color:d.color}); });
-    bullets = bullets.filter(b => {
-        if(!enemies.includes(b.target)) return false;
-        let dx = b.target.x+17 - b.x, dy = b.target.y+17 - b.y, dist = Math.sqrt(dx*dx+dy*dy);
-        if(dist < 10) { b.target.hp -= b.dmg; return false; }
-        b.x += dx/dist * 22; b.y += dy/dist * 22;
-        ctx.fillStyle = b.color; ctx.beginPath(); ctx.arc(b.x, b.y, 6, 0, Math.PI*2); ctx.fill(); return true;
+
+    board.forEach((d,i)=>{
+        if(d && enemies.length>0 && frame%40===0){
+            bullets.push({x:(i%col)*sz+sz/2,y:bY+Math.floor(i/col)*sz+sz/2,t:enemies[0],dmg:d.dmg*d.dots,c:d.color});
+        }
     });
-    if(drag !== -1) drawDice(mx-35, my-35, board[drag]);
-    if(hp <= 0) { gameRunning = false; location.reload(); }
+
+    bullets=bullets.filter(b=>{
+        if(!enemies.includes(b.t)) return false;
+        let dx=b.t.x+b.t.sz/2-b.x, dy=b.t.y+b.t.sz/2-b.y, dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<10){ b.t.hp-=b.dmg; return false; }
+        b.x+=dx/dist*18; b.y+=dy/dist*18;
+        ctx.fillStyle=b.c; ctx.beginPath(); ctx.arc(b.x,b.y,5,0,Math.PI*2); ctx.fill();
+        return true;
+    });
+    if(drag!==-1) drawD(mx-35,my-35,board[drag]);
+    if(hp<=0) eG();
 }
 
-function drawDice(x, y, d) {
+function nW(){ isW=true; setTimeout(()=>{ wave++; eInW=0; mE+=2; isW=false; upUI(); },2000); }
+
+function drawD(x,y,d){
     ctx.save();
-    let isHD = allSkins[d.id].owned;
-    let grd = ctx.createRadialGradient(x+sz/2, y+sz/2, 5, x+sz/2, y+sz/2, 35);
-    grd.addColorStop(0, "white"); grd.addColorStop(0.3, d.color); grd.addColorStop(1, "black");
-    if(isHD) { ctx.shadowBlur = 15; ctx.shadowColor = d.color; }
-    ctx.fillStyle = grd; ctx.beginPath(); ctx.roundRect(x+8, y+8, sz-16, sz-16, 15); ctx.fill();
-    if(d.isU || isHD) { ctx.strokeStyle = isHD ? "#fff" : "#f472b6"; ctx.lineWidth = 2; ctx.stroke(); }
-    ctx.fillStyle = "white"; ctx.textAlign = "center"; ctx.font = "bold 9px Arial"; ctx.fillText(d.name, x+sz/2, y+sz/2-2);
-    ctx.font = "bold 24px Arial"; ctx.fillText(d.dots, x+sz/2, y+sz-12);
+    let ownedSkin = sD[d.id].owned;
+    if(ownedSkin) {
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = d.color;
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 2;
+    }
+    ctx.fillStyle=d.color; ctx.beginPath(); ctx.roundRect(x+10,y+10,sz-20,sz-20,12); ctx.fill();
+    if(ownedSkin) ctx.stroke();
+    ctx.fillStyle="white"; ctx.textAlign="center"; ctx.font="bold 10px Arial";
+    ctx.fillText(d.name,x+sz/2,y+sz/2-5);
+    ctx.font="bold 18px Arial"; ctx.fillText("★".repeat(d.dots),x+sz/2,y+sz/2+16);
     ctx.restore();
 }
 
-/** --- TOUCH & MERGE --- **/
-function getIdx(x, y) { if (y < boardY || y > boardY + sz*3) return -1; let c = Math.floor(x/sz), r = Math.floor((y-boardY)/sz); return (c>=0 && c<col && r>=0 && r<3)? r*col+c : -1; }
-function isOverTrash(x, y) { const trash = document.getElementById('trashBin').getBoundingClientRect(); return (x > trash.left && x < trash.right && y > trash.top && y < trash.bottom); }
-cvs.addEventListener('touchstart', e => { let r = cvs.getBoundingClientRect(); mx = e.touches[0].clientX - r.left; my = e.touches[0].clientY - r.top; let i = getIdx(mx, my); if (i!=-1 && board[i]) drag=i; });
-cvs.addEventListener('touchmove', e => { if (drag===-1) return; e.preventDefault(); let r = cvs.getBoundingClientRect(); mx = e.touches[0].clientX - r.left; my = e.touches[0].clientY - r.top; });
+function spn(){ let e=board.indexOf(null); if(sp>=50 && e!=-1){ sp-=50; let i=Math.floor(Math.random()*40); board[e]={...dD[i], dots:1}; upUI(); } }
+function eG(){ gR=false; openUI('gameOverUI'); }
+function re(){ sp=1000; hp=1000; wave=1; enemies=[]; bullets=[]; board.fill(null); closeUI('gameOverUI'); gR=true; upUI(); render(); }
+function gameStart(mode){ bossMode=mode; closeUI('mainMenu'); gR=true; upUI(); render(); }
+
+/** --- TOUCH --- **/
+cvs.addEventListener('touchstart', e => {
+    let r=cvs.getBoundingClientRect(); mx=e.touches[0].clientX-r.left; my=e.touches[0].clientY-r.top;
+    let i=Math.floor(mx/sz)+Math.floor((my-bY)/sz)*col;
+    if(board[i]) drag=i;
+});
+cvs.addEventListener('touchmove', e => { if(drag===-1) return; e.preventDefault(); let r=cvs.getBoundingClientRect(); mx=e.touches[0].clientX-r.left; my=e.touches[0].clientY-r.top; });
 cvs.addEventListener('touchend', e => {
-    if (drag===-1) return;
-    if(isOverTrash(e.changedTouches[0].clientX, e.changedTouches[0].clientY)) { board[drag] = null; sp += 30; updateUI(); }
-    else { let t = getIdx(mx, my); if (t!=-1 && t!=drag && board[t] && board[t].id===board[drag].id && board[t].dots===board[drag].dots && board[t].dots<7) { board[t].dots++; board[drag]=null; } }
+    if(drag===-1) return;
+    let ex=e.changedTouches[0].clientX, ey=e.changedTouches[0].clientY;
+    let tR=document.getElementById('trashBin').getBoundingClientRect();
+    if(ex>tR.left && ex<tR.right && ey>tR.top && ey<tR.bottom){ board[drag]=null; sp+=30; upUI(); }
+    else {
+        let t=Math.floor(mx/sz)+Math.floor((my-bY)/sz)*col;
+        if(t!==-1 && t!==drag && board[t] && board[t].id===board[drag].id && board[t].dots===board[drag].dots && board[t].dots<7){ board[t].dots++; board[drag]=null; if(navigator.vibrate) navigator.vibrate(50); }
+    }
     drag=-1;
 });
-
-function spawn() { let empty = board.indexOf(null); if(sp >= 50 && empty != -1) { sp -= 50; let idx = Math.random() < 0.05 ? Math.floor(Math.random()*50)+30 : Math.floor(Math.random()*30); board[empty] = {...allDices[idx], dots:1}; updateUI(); } }
-function gameStart(n) { closeUI('mainMenu'); if(n){sp=1000;hp=1000;wave=1;board.fill(null);enemies=[];bullets=[];} gameRunning=true; render(); updateUI(); }
-setInterval(()=>{ if(gameRunning) { frame%2000==0 && (wave++, updateUI()); } }, 1000);
 </script>
 </body>
 </html>
