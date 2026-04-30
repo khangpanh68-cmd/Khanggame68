@@ -1,20 +1,20 @@
-name: Deploy V15
+name: Deploy V18.6
 
 on:
   push:
-    # Tự động chạy khi bạn push lên nhánh main hoặc master
+    # Tự động chạy khi Khang push code lên nhánh main hoặc master
     branches: ["main", "master"]
   
-  # Cho phép kích hoạt thủ công từ tab Actions trên GitHub
+  # Cho phép Khang kích hoạt thủ công từ tab Actions trên GitHub
   workflow_dispatch:
 
-# Thiết lập quyền hạn tối ưu cho GitHub Pages 2026
+# Thiết lập quyền hạn tối ưu cho GitHub Pages chuẩn 2026
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Đảm bảo không bị xung đột khi deploy liên tục
+# Đảm bảo quy trình deploy mượt mà, không bị xung đột khi update liên tục
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -27,19 +27,18 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
         with:
-          # Triển khai toàn bộ file tại thư mục gốc (index.html)
+          # Triển khai toàn bộ file tại thư mục gốc (nơi chứa index.html)
           path: '.'
+        uses: actions/upload-pages-artifact@v3
 
-      - name: Deploy
+      - name: Deploy to Web
         id: deployment
         uses: actions/deploy-pages@v4
-        
